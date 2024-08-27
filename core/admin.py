@@ -6,7 +6,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext_lazy as _
 
-from core.models import Autor, Categoria, Editora, Livro, User
+from core.models import Autor, Categoria, Editora, Livro, Tipo, User
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
@@ -80,4 +80,12 @@ class LivroAdmin(admin.ModelAdmin):
     search_fields = ('titulo', 'editora__nome', 'categoria__descricao')
     list_filter = ('editora', 'categoria')
     ordering = ('titulo', 'editora', 'categoria')
+    list_per_page = 10
+
+@admin.register(Tipo)
+class TipoAdmin(admin.ModelAdmin):
+    list_display = ('descricao',)
+    search_fields = ('descricao',)
+    list_filter = ('descricao',)
+    ordering = ('descricao',)
     list_per_page = 10
