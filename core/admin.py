@@ -76,10 +76,10 @@ class EditoraAdmin(admin.ModelAdmin):
 
 @admin.register(Livro)
 class LivroAdmin(admin.ModelAdmin):
-    list_display = ('titulo', 'editora', 'categoria')
-    search_fields = ('titulo', 'editora__nome', 'categoria__descricao')
-    list_filter = ('editora', 'categoria')
-    ordering = ('titulo', 'editora', 'categoria')
+    list_display = ('titulo', 'editora', 'categoria', 'tipo')
+    search_fields = ('titulo', 'editora__nome', 'categoria__descricao', 'tipo_descricao')
+    list_filter = ('editora', 'categoria', 'tipo')
+    ordering = ('titulo', 'editora', 'categoria', 'tipo')
     list_per_page = 10
 
 @admin.register(Tipo)

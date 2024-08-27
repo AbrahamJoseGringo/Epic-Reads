@@ -5,6 +5,7 @@ from uploader.models import Image
 from .categoria import Categoria
 from .editora import Editora
 from .autor import Autor
+from .tipo import Tipo
 
 
 class Livro(models.Model):
@@ -15,6 +16,7 @@ class Livro(models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.PROTECT, related_name="livros", blank=True, null=True)
     editora = models.ForeignKey(Editora, on_delete=models.PROTECT, related_name="livros", blank=True, null=True)
     autores = models.ManyToManyField(Autor, related_name="livros", blank=True)
+    tipo = models.ForeignKey(Tipo, on_delete=models.PROTECT, related_name="livros", blank=True, null=True)
     capa = models.ForeignKey(
         Image,
         related_name="+",
