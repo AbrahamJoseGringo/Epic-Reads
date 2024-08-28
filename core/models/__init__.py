@@ -5,3 +5,4 @@ from .autor import Autor
 from .livro import Livro
 from .tipo import Tipo
 from .manhwa import Manhwa
+from .manga import Manga

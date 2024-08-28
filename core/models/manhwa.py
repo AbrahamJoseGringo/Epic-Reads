@@ -3,14 +3,12 @@ from django.db import models
 from uploader.models import Image
 
 from .categoria import Categoria
-from .editora import Editora
 from .tipo import Tipo
 
 
 class Manhwa(models.Model):
     titulo = models.CharField(max_length=255)
     categoria = models.ForeignKey(Categoria, on_delete=models.PROTECT, related_name="manhwas", blank=True, null=True)
-    editora = models.ForeignKey(Editora, on_delete=models.PROTECT, related_name="manhwas", blank=True, null=True)
     tipo = models.ForeignKey(Tipo, on_delete=models.PROTECT, related_name="manhwas", blank=True, null=True)
     capa = models.ForeignKey(
         Image,
