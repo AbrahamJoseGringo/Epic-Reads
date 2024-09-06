@@ -8,6 +8,7 @@ from django.utils.translation import gettext_lazy as _
 
 from core.models import Autor, Categoria, Editora, Livro, Manga, Manhwa, Tipo, User
 
+
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
     """Define the admin pages for users."""
@@ -16,7 +17,7 @@ class UserAdmin(BaseUserAdmin):
     list_display = ["email", "name"]
     fieldsets = (
         (None, {"fields": ("email", "password")}),
-        (_("Personal Info"), {"fields": ("name",)}),
+           (_("Personal Info"), {"fields": ("name","foto")}),
         (
             _("Permissions"),
             {
