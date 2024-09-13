@@ -83,14 +83,6 @@ class LivroAdmin(admin.ModelAdmin):
     ordering = ('titulo', 'editora', 'categoria', 'tipo')
     list_per_page = 10
 
-@admin.register(Manga)
-class MangaAdmin(admin.ModelAdmin):
-    list_display = ('titulo', 'editora', 'categoria', 'tipo')
-    search_fields = ('titulo', 'editora__nome', 'categoria__descricao', 'tipo_descricao')
-    list_filter = ('editora', 'categoria', 'tipo')
-    ordering = ('titulo', 'editora', 'categoria', 'tipo')
-    list_per_page = 10
-
 @admin.register(Manhwa)
 class ManhwaAdmin(admin.ModelAdmin):
     list_display = ('titulo', 'categoria', 'tipo')

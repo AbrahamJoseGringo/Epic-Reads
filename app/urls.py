@@ -11,7 +11,7 @@ from drf_spectacular.views import (
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from core.views import AutorViewSet, CategoriaViewSet, EditoraViewSet, UserViewSet, LivroViewSet, TipoViewSet, ManhwaViewSet, MangaViewSet
+from core.views import AutorViewSet, CategoriaViewSet, EditoraViewSet, UserViewSet, LivroViewSet, TipoViewSet, ManhwaViewSet
 
 from uploader.router import router as uploader_router
 
@@ -23,7 +23,6 @@ router.register(r"livros", LivroViewSet, basename="livros")
 router.register(r"usuarios", UserViewSet, basename="users")
 router.register(r"tipos", TipoViewSet, basename="tipos")
 router.register(r"manhwas", ManhwaViewSet, basename="manhwas")
-router.register(r"mangas", MangaViewSet, basename="mangas")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
