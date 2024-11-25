@@ -12,7 +12,7 @@ dependencies = [
     "django-extensions>=3.2.3",
     "django-filter>=23.3",
     "drf-spectacular>=0.26.5",
-    "gunicorn>=21.2.0",
+    "gunicorn>=23.0.0",
     "netifaces>=0.11.0",
     "pre-commit>=3.5.0",
     "psycopg2-binary>=2.9.9",
@@ -23,6 +23,7 @@ dependencies = [
     "Pillow>=10.4.0",
     "python-magic>=0.4.27; sys_platform == \"linux\"",
     "python-magic-bin>=0.4.14; sys_platform == \"win32, darwin\"",
+    "uvicorn>=0.32.1",
 ]
 requires-python = ">=3.10"
 license = { text = "MIT" }
