@@ -42,6 +42,7 @@ class UserAdmin(BaseUserAdmin):
                     "password1",
                     "password2",
                     "name",
+                    "passage_id",  # Adicione este campo ao formulário de criação
                     "is_active",
                     "is_staff",
                     "is_superuser",
@@ -49,8 +50,6 @@ class UserAdmin(BaseUserAdmin):
             },
         ),
     )
-
-
 
 @admin.register(Autor)
 class AutorAdmin(admin.ModelAdmin):
