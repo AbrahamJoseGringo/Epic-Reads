@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     "django_filters",
     "drf_spectacular",
     "rest_framework",
-    "rest_framework_simplejwt",
     "uploader",
     "core",
 ]
@@ -84,8 +83,8 @@ DATABASES = {
         conn_health_checks=True,
     )
 }
+
 # Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
