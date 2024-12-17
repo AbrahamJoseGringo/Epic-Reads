@@ -68,3 +68,11 @@ class AvaliacaoMahhwa(models.Model):
 
     def __str__(self):
         return f"Avaliação de {self.manhwa.titulo} - {self.puntuacao} estrelas"
+
+class Capitulo(models.Model):
+    manhwa = models.ForeignKey(Manhwa, on_delete=models.CASCADE, related_name="capitulos")
+    titulo = models.CharField(max_length=255)
+    numero = models.IntegerField()
+
+    def __str__(self):
+        return f"Capítulo {self.numero}: {self.titulo}"

@@ -5,7 +5,7 @@ from rest_framework.serializers import (
 )
 from uploader.models import Image
 from uploader.serializers import ImageSerializer
-from core.models import Manhwa, AvaliacaoMahhwa
+from core.models import Manhwa, AvaliacaoMahhwa, Capitulo
 
 
 class ManhwaSerializer(ModelSerializer):
@@ -16,46 +16,45 @@ class ManhwaSerializer(ModelSerializer):
         required=False,
         write_only=True,
     )
-    capa_url = SerializerMethodField()  # URL da capa
-    calificacion_prom = SerializerMethodField()  # Média de avaliações
+    capa_url = SerializerMethodField()
+    calificacion_prom = SerializerMethodField()
+    numero_capitulos = SerializerMethodField()  # Novo campo: número de capítulos
 
     class Meta:
         model = Manhwa
-        fields = ("id", "titulo", "tipo", "capa_url", "calificacion_prom")
+        fields = ("id", "titulo", "tipo", "capa_url", "calificacion_prom", "numero_capitulos")
 
     def get_capa_url(self, obj):
-        """
-        Retorna a URL da capa se existir.
-        """
         if obj.capa:
             return obj.capa.url
         return None
 
     def get_calificacion_prom(self, obj):
-        """
-        Retorna a média de avaliações do manhwa.
-        """
         avaliacoes = AvaliacaoMahhwa.objects.filter(manhwa=obj)
         if avaliacoes.exists():
             promedio = sum(avaliacao.puntuacao for avaliacao in avaliacoes) / avaliacoes.count()
             return round(promedio, 2)
         return None
 
+    def get_numero_capitulos(self, obj):
+        """
+        Retorna o número de capítulos associados ao manhwa.
+        """
+        return obj.capitulos.count()
+
 
 class ManhwaDetailSerializer(ModelSerializer):
     capa = ImageSerializer(required=False)
-    calificacion_prom = SerializerMethodField()  # Média de avaliações
-    tipo = SerializerMethodField()  # Inclui o campo 'tipo'
+    calificacion_prom = SerializerMethodField()
+    tipo = SerializerMethodField()
+    numero_capitulos = SerializerMethodField()  # Número de capítulos
 
     class Meta:
         model = Manhwa
-        fields = ("id", "titulo", "tipo", "capa", "calificacion_prom", "descricao")
+        fields = ("id", "titulo", "tipo", "capa", "calificacion_prom", "descricao", "numero_capitulos")
         depth = 1
 
     def get_calificacion_prom(self, obj):
-        """
-        Retorna a média de avaliações do manhwa.
-        """
         avaliacoes = AvaliacaoMahhwa.objects.filter(manhwa=obj)
         if avaliacoes.exists():
             promedio = sum(avaliacao.puntuacao for avaliacao in avaliacoes) / avaliacoes.count()
@@ -63,34 +62,38 @@ class ManhwaDetailSerializer(ModelSerializer):
         return None
 
     def get_tipo(self, obj):
-        """
-        Retorna o tipo do manhwa.
-        """
         return obj.tipo if obj.tipo else "Desconhecido"
+
+    def get_numero_capitulos(self, obj):
+        """
+        Retorna o número de capítulos associados ao manhwa.
+        """
+        return obj.capitulos.count()
 
 
 class ManhwaListSerializer(ModelSerializer):
     capa_url = SerializerMethodField()
     calificacion_prom = SerializerMethodField()
+    numero_capitulos = SerializerMethodField()  # Novo campo: número de capítulos
 
     class Meta:
         model = Manhwa
-        fields = ("id", "titulo", "tipo", "capa_url", "calificacion_prom")
+        fields = ("id", "titulo", "tipo", "capa_url", "calificacion_prom", "numero_capitulos")
 
     def get_capa_url(self, obj):
-        """
-        Retorna a URL da capa se existir.
-        """
         if obj.capa:
             return obj.capa.url
         return None
 
     def get_calificacion_prom(self, obj):
-        """
-        Retorna a média de avaliações do manhwa.
-        """
         avaliacoes = AvaliacaoMahhwa.objects.filter(manhwa=obj)
         if avaliacoes.exists():
             promedio = sum(avaliacao.puntuacao for avaliacao in avaliacoes) / avaliacoes.count()
             return round(promedio, 2)
         return None
+
+    def get_numero_capitulos(self, obj):
+        """
+        Retorna o número de capítulos associados ao manhwa.
+        """
+        return obj.capitulos.count()
