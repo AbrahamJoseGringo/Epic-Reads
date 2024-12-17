@@ -2,6 +2,7 @@ from django.db import models
 from uploader.models import Image, Document
 from .categoria import Categoria
 from .tipo import Tipo
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 LANGUAGE_CHOICES = [
@@ -56,3 +57,14 @@ class Manhwa(models.Model):
     class Meta:
         ordering = ['numero']  
         unique_together = ('numero', 'titulo') 
+
+class AvaliacaoMahhwa(models.Model):
+    manhwa = models.ForeignKey(Manhwa, on_delete=models.CASCADE, related_name='avaliacoes')
+    puntuacao = models.FloatField(
+        validators=[MinValueValidator(1), MaxValueValidator(10)]
+    )
+    comentario = models.TextField(blank=True, null=True)
+    criado_em = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Avaliação de {self.manhwa.titulo} - {self.puntuacao} estrelas"
